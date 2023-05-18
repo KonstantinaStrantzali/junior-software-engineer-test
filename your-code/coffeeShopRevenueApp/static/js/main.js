@@ -3,18 +3,23 @@ const selectedBorough = document.getElementById("selected-borough");
 const tableContainer = document.getElementById("table-container");
 const total = document.getElementById("total-revenues");
 
-boroughSelect.addEventListener("change",  async (event) => {
-    const boroughSelect = event.target.value;
-    selectedBorough.textContent = boroughSelect;
+let coffeeshops = [];
+async function fetchAllCoffeeShops(){
+    const response = await fetch("http://localhost:3000/coffeeshops");
+    if (!response.ok) {
+        console.log("Error fetching data");
+        return;
+    }
+    const data = await response.json();
+    coffeeshops = data.coffeeshops || [];
+    borough.disabled = false;
+}
+fetchAllCoffeeShops();
+boroughSelect.addEventListener("change",  (event) => {
 
     try {
-        const response = await fetch("http://localhost:3000/coffeeshops");
-        if (!response.ok) {
-            throw new Error("Error fetching data");
-        }
-         const data = await response.json();
-         const coffeeshops = data.coffeeshops || [];
-
+        const boroughSelect = event.target.value;
+        selectedBorough.textContent = boroughSelect;
         // Filter the coffee shops based on the selected borough
         const filteredCoffeeshops = coffeeshops.filter((coffeeshop) => coffeeshop.borough === boroughSelect);
 
