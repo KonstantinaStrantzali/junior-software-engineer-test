@@ -27,7 +27,17 @@
     <p>Borough: <span id="selected-borough"></span></p>
 </div>
 {% block postloadjs %}
+    <script>
+    const boroughSelect = document.getElementById('borough');
+    const selectedBorough = document.getElementById('selected-borough');
 
+
+  boroughSelect.addEventListener('change', (event) => {
+    const boroughSelect  = event.target.value;
+    selectedBorough.textContent = boroughSelect;
+
+
+    </script>
 {% endblock %}
 </body>
 </html>
