@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+   <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<div class="container">
+    <div>
+<img src="{% static 'images/ael-logo.png' %}" alt="logo-picture">
+    </div>
+<div>
+    <h1 class="title">Coffee Shop Revenue App</h1>
+</div>
+<div class="drop-down-list">
+    <label for="borough">Select a borough:</label>
+    <select name="borough" id="borough">
+        <option value="">All boroughs</option>
+        {% for borough in boroughs %}
+        <option value="{{ borough }}">{{ borough }}</option>
+        {% endfor %}
+    </select>
+</div>
+    <p>Borough: <span id="selected-borough"></span></p>
+</div>
+{% block postloadjs %}
+
+{% endblock %}
+</body>
+</html>
