@@ -6,6 +6,7 @@
 <head>
     <meta charset="UTF-8">
    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
 </head>
 <body>
 <div class="container">
@@ -25,38 +26,11 @@
     </select>
 </div>
     <p>Borough: <span id="selected-borough"></span></p>
+    <table id="table-container"></table>
+
 </div>
 {% block postloadjs %}
-    <script>
-    const boroughSelect = document.getElementById('borough');
-    const selectedBorough = document.getElementById('selected-borough');
-
-
-  boroughSelect.addEventListener('change', (event) => {
-    const boroughSelect  = event.target.value;
-    selectedBorough.textContent = boroughSelect;
-
-const xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-        // Process the API response and update the UI as needed
-        const response = JSON.parse(xhr.responseText);
-        const coffeeshops = response.coffeeshops || [];
-
-        // Filter the coffee shops based on the selected borough
-        const filteredCoffeeshops = coffeeshops.filter(coffeeshop => coffeeshop.borough === boroughSelect);
-
-
-filteredCoffeeshops.forEach(coffeeshop => {
-      console.log(coffeeshop);
-      // Update the UI or perform any desired actions for each matching coffee shop
-    });
-      }
-    };
-    xhr.open('GET', 'http://localhost:3000/coffeeshops');
-    xhr.send();
-  });
-    </script>
+    <script src="{% static 'js/main.js' %}"></script>
 {% endblock %}
 </body>
 </html>
