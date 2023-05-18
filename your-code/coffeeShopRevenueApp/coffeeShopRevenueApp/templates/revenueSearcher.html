@@ -36,7 +36,26 @@
     const boroughSelect  = event.target.value;
     selectedBorough.textContent = boroughSelect;
 
+const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        // Process the API response and update the UI as needed
+        const response = JSON.parse(xhr.responseText);
+        const coffeeshops = response.coffeeshops || [];
 
+        // Filter the coffee shops based on the selected borough
+        const filteredCoffeeshops = coffeeshops.filter(coffeeshop => coffeeshop.borough === boroughSelect);
+
+
+filteredCoffeeshops.forEach(coffeeshop => {
+      console.log(coffeeshop);
+      // Update the UI or perform any desired actions for each matching coffee shop
+    });
+      }
+    };
+    xhr.open('GET', 'http://localhost:3000/coffeeshops');
+    xhr.send();
+  });
     </script>
 {% endblock %}
 </body>
