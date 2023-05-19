@@ -1,37 +1,47 @@
-
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-   <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
 </head>
 <body>
-<div class="container">
-    <div>
-<img src="{% static 'images/ael-logo.png' %}" alt="logo-picture">
-    </div>
-<div>
-    <h1 class="title">Coffee Shop Revenue App</h1>
-</div>
-<div class="drop-down-list">
-    <label for="borough">Select a borough:</label>
-    <select name="borough" id="borough" disabled>
-        <option value="">All boroughs</option>
-        {% for borough in boroughs %}
-        <option value="{{ borough }}">{{ borough }}</option>
-        {% endfor %}
-    </select>
-</div>
-    <p>Borough: <span id="selected-borough"></span></p>
-    <p>Total Revenue: <span id="total-revenues"></span></p>
-    <table id="table-container"></table>
+<nav class="fill">
+    <ul>
+        <li><img src="{% static 'images/ael-logo.png' %}" alt="SCP"></li>
+        <li><a href="{% url 'revenueSearcher' %}">Home</a></li>
+        <li><a href="{% url 'revenueSearcher' %}">Search</a></li>
+        <li><a href="{% url 'revenueSearcher' %}">Contact</a></li>
+    </ul>
+</nav>
 
+
+<div class="container">
+
+    <div>
+        <h1 class="title">Coffee Shop Revenue App</h1>
+    </div>
+    <div class="card">
+        <div class="drop-down-list">
+            <label for="borough">Select a Borough:</label>
+            <select name="borough" id="borough" disabled>
+                <option value=""></option>
+                {% for borough in boroughs %}
+                <option value="{{ borough }}"> {{ borough }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <p>Selected borough: <b> <span id="selected-borough"></span> </b></p>
+        <p class="total-title">Total Revenue: <b> <span id="total-revenues"> </span> </b></p>
+        <table id="table-container"></table>
+    </div>
 </div>
+<footer><h3><b>&copy; 2023 Amberside Energy</b></h3></footer>
 {% block postloadjs %}
-    <script src="{% static 'js/main.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
 {% endblock %}
+
 </body>
 </html>
